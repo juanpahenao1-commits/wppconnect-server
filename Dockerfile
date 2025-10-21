@@ -11,9 +11,9 @@ RUN apk update && \
     make \
     libc6-compat \
     && rm -rf /var/cache/apk/*
-RUN yarn install --production --pure-lockfile && \
-    yarn add sharp --ignore-engines && \
-    yarn cache clean
+RUN npm install --legacy-peer-deps && \
+    npm install --os=linux --libc=musl --cpu=x64 sharp && \
+    npm cache clean --force
 
 FROM base AS build
 WORKDIR /usr/src/wpp-server
